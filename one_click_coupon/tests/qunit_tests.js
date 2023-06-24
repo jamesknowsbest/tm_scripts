@@ -14,6 +14,9 @@ test('delay is function', assert => {
 test('userIsLoggedIn is function', assert => {
     assert.true(typeof userIsLoggedIn === "function", 'userIsLoggedIn is a function');
 });
+test('createClipAllBtn is function', assert => {
+    assert.true(typeof createClipAllBtn === "function", 'createClipAllBtn is a function');
+});
 
 QUnit.module('Functional tests');
 
@@ -23,8 +26,8 @@ test('findAllCoupons returns NodeList with length of 5', assert => {
     assert.true(typeof NodeListOfCoupons === "object", 'NodeListOfCoupons is a object');
     assert.true(NodeListOfCoupons.length === 5, 'NodeListOfCoupons has length of 5');
 });
-test('clipAllCoupons returns true', assert => {
-    let result = clipAllCoupons();
+test('clipAllCoupons returns true', async assert => {
+    let result = await clipAllCoupons();
     assert.true(typeof result === "boolean", 'result is a boolean');
     assert.true(result, 'result is true');
 });

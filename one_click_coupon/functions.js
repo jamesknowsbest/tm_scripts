@@ -1,5 +1,15 @@
+/**
+ * handy function to wait for a predetermined amount of time
+ * found here https://stackoverflow.com/a/47480429
+ * @param {num of milliseconds to wait} ms 
+ * @returns 
+ */
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
+/**
+ * 
+ * @returns 
+ */
 const findAllCoupons = function () {
     // scroll to bottom of the page to load all coupons
 
@@ -22,14 +32,14 @@ const userIsLoggedIn = function () {
  * clips all coupons by clicking on the btn
  * @returns true if no exception thrown while clicking, false otherwise
  */
-const clipAllCoupons = function () {
+const clipAllCoupons = async function () {
     let coupons = findAllCoupons();
     coupons = Array.prototype.slice.call(coupons);
     try {
         for (const coupon of coupons) {
             // for every 5th coupon wait 5 seconds to help avoid throttles
             if (coupons.indexOf(coupon) % 5 === 0) {
-                delay(5000);
+                await delay(5000);
                 // TODO update button text to show progress 
             }
             coupon.click();
@@ -39,4 +49,11 @@ const clipAllCoupons = function () {
         return false;
     }
     return true;
+}
+
+/**
+ * create button on the page with styles
+ */
+const createClipAllBtn = function () {
+    
 }
