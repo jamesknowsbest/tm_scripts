@@ -13,7 +13,13 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 const findAllCoupons = function () {
     // scroll to bottom of the page to load all coupons
     let root = document.getElementById("root");
+    let scrollHeight = root.scrollHeight;
     window.scrollTo(0, root.scrollHeight);
+    // query to see if loading div is visible
+    while (scrollHeight != root.scrollHeight) {
+        scrollHeight = root.scrollHeight;
+        window.scrollTo(0, root.scrollHeight);
+    }
     // query for all coupons on the page
     let coupons = document.querySelectorAll("#content > section > div > section.relative.pt-48 > section > section > div > div.CouponsCatalogue-bottomContent.flex.items-start > div.CouponsCatalogue-coupons.flex-1.flex.flex-col.overflow-hidden > div > div > div > ul > li > div > div > div > div > div.CouponCard-ButtonSection > button:nth-child(2)");
     // return all coupon buttons as an array of button elements
@@ -35,16 +41,16 @@ const userIsLoggedIn = function () {
  */
 const clipAllCoupons = async function () {
     //check if user is logged in first and if not return false and display prompt
-    if (!userIsLoggedIn) {
-        console.log("user is not logged in");
-        GM_notification({
-            text: "Hi, you are not logged in, please log in to clip coupons",
-            title: "Please log in",
-            silent: true,
-            timeout: 7000
-        });
-        return false;
-    }
+    // if (!userIsLoggedIn) {
+    //     console.log("user is not logged in");
+    //     GM_notification({
+    //         text: "Hi, you are not logged in, please log in to clip coupons",
+    //         title: "Please log in",
+    //         silent: true,
+    //         timeout: 7000
+    //     });
+    //     return false;
+    // }
     let coupons = findAllCoupons();
     coupons = Array.prototype.slice.call(coupons);
     let totalNumOfCoupons = coupons.length;
@@ -55,7 +61,7 @@ const clipAllCoupons = async function () {
             // for every 5th coupon wait 5 seconds to help avoid throttles
             if (coupons.indexOf(coupon) % 5 === 0) {
                 await delay(5000);
-                clipAllBtnInnerTxt.innerText = `clipping... ${coupons.indexOf(coupon)/totalNumOfCoupons}% clipped`;
+                clipAllBtnInnerTxt.innerText = `clipping... ${int((coupons.indexOf(coupon)/totalNumOfCoupons)*100)}% clipped`;
             }
             coupon.click();
         }

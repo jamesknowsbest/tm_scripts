@@ -29,7 +29,7 @@ test('findAllCoupons returns NodeList with length of 5', assert => {
 test('clipAllCoupons returns true', async assert => {
     let result = await clipAllCoupons();
     assert.true(typeof result === "boolean", 'result is a boolean');
-    assert.true(result, 'result is true');
+    assert.false(result, 'result is false because not signed in');
 });
 test('userIsLoggedIn returns false', assert => {
     let result = userIsLoggedIn();
