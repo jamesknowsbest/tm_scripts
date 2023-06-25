@@ -61,7 +61,7 @@ const clipAllCoupons = async function () {
             // for every 5th coupon wait 5 seconds to help avoid throttles
             if (coupons.indexOf(coupon) % 5 === 0) {
                 await delay(5000);
-                clipAllBtnInnerTxt.innerText = `clipping... ${int((coupons.indexOf(coupon)/totalNumOfCoupons)*100)}% clipped`;
+                clipAllBtnInnerTxt.innerText = `clipping... ${parseInt((coupons.indexOf(coupon)/totalNumOfCoupons)*100)}% clipped`;
             }
             coupon.click();
         }
