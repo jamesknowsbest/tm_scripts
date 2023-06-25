@@ -10,16 +10,19 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
  * 
  * @returns 
  */
-const findAllCoupons = function () {
+const findAllCoupons = async function () {
     // scroll to bottom of the page to load all coupons
     let root = document.getElementById("root");
     let scrollHeight = root.scrollHeight;
     window.scrollTo(0, root.scrollHeight);
-    // query to see if loading div is visible
+    await delay(5000);
     while (scrollHeight != root.scrollHeight) {
+        window.scrollTo(scrollHeight, root.scrollHeight);
         scrollHeight = root.scrollHeight;
-        window.scrollTo(0, root.scrollHeight);
+        await delay(5000);
     }
+    // go back to the top when done
+    window.scrollTo(0, 0);
     // query for all coupons on the page
     let coupons = document.querySelectorAll("#content > section > div > section.relative.pt-48 > section > section > div > div.CouponsCatalogue-bottomContent.flex.items-start > div.CouponsCatalogue-coupons.flex-1.flex.flex-col.overflow-hidden > div > div > div > ul > li > div > div > div > div > div.CouponCard-ButtonSection > button:nth-child(2)");
     // return all coupon buttons as an array of button elements
