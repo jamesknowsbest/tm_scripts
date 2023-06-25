@@ -70,8 +70,9 @@ const createClipAllBtn = async function () {
     let clipAllBtn = GM_addElement(btnContainer, 'button', {
         id : "clipAllBtn",
         innerText : "Clip all coupons displayed",
-        class : "kds-Tabs-tab interactive kind-dominant variant-fill palette-accent",
-        onclick : clipAllCoupons
+        class : "kds-Tabs-tab interactive kind-dominant variant-fill palette-accent"
     });
+    clipAllBtn.addEventListener('click', clipAllCoupons);
+    clipAllBtn.innerHTML = "<span data-testid=\"all-coupons-tab\" class=\"kds-Text--l tab-text\">Clip All Coupons</span>";
     return clipAllBtn;
 };

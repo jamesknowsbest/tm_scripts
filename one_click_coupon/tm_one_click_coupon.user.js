@@ -16,5 +16,4 @@
     'use strict';
     // create button for user to click
     let clipAllBtn = createClipAllBtn();
-    console.log("clipAllBtn:",clipAllBtn);
 })();
