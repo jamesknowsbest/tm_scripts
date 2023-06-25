@@ -6,15 +6,15 @@
 // @author       James Palmisano
 // @match        https://www.kroger.com/savings/cl/coupons/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=kroger.com
-// @grant        none
+// @grant        GM_notification
+// @grant        GM_addElement
+// @require      https://github.com/jamesknowsbest/tm_scripts/raw/main/one_click_coupon/functions.js
 // ==/UserScript==
 
 
 
 (function () {
     'use strict';
-    // mk btn for user to easily click and clip all coupons
-
-    // mk function to find all coupon btns returned as an array of elements
-
+    // create button for user to click
+    createClipAllBtn();
 })();

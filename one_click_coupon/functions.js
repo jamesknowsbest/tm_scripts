@@ -33,6 +33,16 @@ const userIsLoggedIn = function () {
  * @returns true if no exception thrown while clicking, false otherwise
  */
 const clipAllCoupons = async function () {
+    //check if user is logged in first and if not return false and display prompt
+    if (!userIsLoggedIn) {
+        GM_notification({
+            text: "Hi, you are not logged in, please log in to clip coupons",
+            title: "Please log in",
+            silent: true,
+            timeout: 7000
+        });
+        return false;
+    }
     let coupons = findAllCoupons();
     coupons = Array.prototype.slice.call(coupons);
     try {
@@ -55,5 +65,11 @@ const clipAllCoupons = async function () {
  * create button on the page with styles
  */
 const createClipAllBtn = function () {
-    
+    let btnContainer = document.querySelector("#content > section > div > section > section > div");
+    GM_addElement(btnContainer, 'button', {
+        id : "clipAllBtn",
+        innerText : "Clip all coupons displayed",
+        class: "kds-Tabs-tab interactive kind-dominant variant-fill palette-accent",
+        onclick: clipAllCoupons
+    });
 }
