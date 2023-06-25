@@ -15,9 +15,11 @@ const findAllCoupons = async function () {
     let root = document.getElementById("root");
     let scrollHeight = root.scrollHeight;
     window.scrollTo(0, root.scrollHeight);
+    root = document.getElementById("root");
     await delay(5000);
     while (scrollHeight != root.scrollHeight) {
         window.scrollTo(scrollHeight, root.scrollHeight);
+        root = document.getElementById("root");
         scrollHeight = root.scrollHeight;
         await delay(5000);
     }
