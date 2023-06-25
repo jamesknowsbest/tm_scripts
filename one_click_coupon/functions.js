@@ -58,6 +58,7 @@ const clipAllCoupons = async function () {
     // }
     let coupons = findAllCoupons();
     coupons = Array.prototype.slice.call(coupons);
+    console.log("coupons", coupons);
     let totalNumOfCoupons = coupons.length;
     let clipAllBtnInnerTxt = document.getElementById("clipAllBtnInnerTxt");
     try {
@@ -70,7 +71,7 @@ const clipAllCoupons = async function () {
             }
             coupon.click();
         }
-        clipAllBtnInnerTxt.innerText = `Finished clipping, happy shopping!`;
+        clipAllBtnInnerTxt.innerText = `Finished clipping!`;
     } catch (error) {
         console.error(error);
         return false;
