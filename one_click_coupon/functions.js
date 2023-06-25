@@ -72,7 +72,7 @@ const createClipAllBtn = async function () {
         innerText : "Clip all coupons displayed",
         class : "kds-Tabs-tab interactive kind-dominant variant-fill palette-accent"
     });
-    clipAllBtn.onclick = clipAllCoupons;
-    clipAllBtn.innerHTML = "<span data-testid=\"all-coupons-tab\" class=\"kds-Text--l tab-text\">Clip All Coupons</span>";
+    clipAllBtn.addEventListener('click', clipAllCoupons, false);
+    clipAllBtn.innerHTML = "<span class=\"kds-Text--l tab-text\">Clip All Coupons</span>";
     return clipAllBtn;
 };
