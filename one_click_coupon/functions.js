@@ -18,7 +18,7 @@ const findAllCoupons = function () {
     // return all coupon buttons as an array of button elements
     // Encourage filtering as large coupon requests sign out user.
     return coupons;
-}
+};
 
 /**
  * tests to see if the user is logged in or not
@@ -26,7 +26,7 @@ const findAllCoupons = function () {
  */
 const userIsLoggedIn = function () {
     return !document.querySelector("#root > div > div.Page-top-block.Page-top-block-pin-t.sticky.stack-highest > div.dpr.Header > div > div.KrogerHeader.flex.items-center > div.KrogerHeader-Item.KrogerHeader-Welcome > div > div > div").innerText.toLowerCase() === "sign in";
-}
+};
 
 /**
  * clips all coupons by clicking on the btn
@@ -59,7 +59,7 @@ const clipAllCoupons = async function () {
         return false;
     }
     return true;
-}
+};
 
 /**
  * create button on the page with styles
@@ -72,4 +72,4 @@ const createClipAllBtn = function () {
         class: "kds-Tabs-tab interactive kind-dominant variant-fill palette-accent",
         onclick: clipAllCoupons
     });
-}
+};
