@@ -64,7 +64,8 @@ const clipAllCoupons = async function () {
 /**
  * create button on the page with styles
  */
-const createClipAllBtn = function () {
+const createClipAllBtn = async function () {
+    await delay(5000);
     let btnContainer = document.querySelector("#content > section > div > section > section > div");
     let clipAllBtn = GM_addElement(btnContainer, 'button', {
         id : "clipAllBtn",
