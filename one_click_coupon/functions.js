@@ -95,8 +95,8 @@ function waitForElm(selector) {
  * create button on the page with styles
  */
 const createClipAllBtn = async function () {
+    await waitForElm("#content > section > div > section > section > div > button[aria-selected=\"false\"]");
     let btnContainer = await waitForElm("#content > section > div > section > section > div");
-    await waitForElm("#content > section > div > section > section > div > button[aria-selected=\"false\"] > span");
     let clipAllBtn = GM_addElement(btnContainer, 'button', {
         id : "clipAllBtn",
         innerText : "Clip all coupons displayed",
