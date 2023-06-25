@@ -16,12 +16,12 @@ const findAllCoupons = async function () {
     let scrollHeight = root.scrollHeight;
     window.scrollTo(0, root.scrollHeight);
     root = document.getElementById("root");
-    await delay(5000);
+    await delay(3000);
     while (scrollHeight != root.scrollHeight) {
         window.scrollTo(scrollHeight, root.scrollHeight);
         root = document.getElementById("root");
         scrollHeight = root.scrollHeight;
-        await delay(5000);
+        await delay(3000);
     }
     // go back to the top when done
     window.scrollTo(0, 0);
@@ -56,7 +56,7 @@ const clipAllCoupons = async function () {
     //     });
     //     return false;
     // }
-    let coupons = findAllCoupons();
+    let coupons = await findAllCoupons();
     coupons = Array.prototype.slice.call(coupons);
     console.log("coupons", coupons);
     let totalNumOfCoupons = coupons.length;
@@ -66,7 +66,7 @@ const clipAllCoupons = async function () {
         for (const coupon of coupons) {
             // for every 5th coupon wait 5 seconds to help avoid throttles
             if (coupons.indexOf(coupon) % 5 === 0) {
-                await delay(5000);
+                await delay(3000);
                 clipAllBtnInnerTxt.innerText = `clipping... ${parseInt((coupons.indexOf(coupon)/totalNumOfCoupons)*100)}% clipped`;
             }
             coupon.click();
@@ -107,7 +107,7 @@ function waitForElm(selector) {
  * create button on the page with styles
  */
 const createClipAllBtn = async function () {
-    await delay(5000);
+    await delay(3000);
     let btnContainer = await waitForElm("#content > section > div > section.relative.pt-48 > section > div");
     let clipAllBtn = GM_addElement(btnContainer, 'button', {
         id : "clipAllBtn",

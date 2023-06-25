@@ -20,8 +20,8 @@ test('createClipAllBtn is function', assert => {
 
 QUnit.module('Functional tests');
 
-test('findAllCoupons returns NodeList with length of 5', assert => {
-    let NodeListOfCoupons = findAllCoupons();
+test('findAllCoupons returns NodeList with length of 5', async assert => {
+    let NodeListOfCoupons = await findAllCoupons();
     console.log("typeof NodeListOfCoupons", typeof NodeListOfCoupons);
     assert.true(typeof NodeListOfCoupons === "object", 'NodeListOfCoupons is a object');
     assert.true(NodeListOfCoupons.length === 5, 'NodeListOfCoupons has length of 5');
