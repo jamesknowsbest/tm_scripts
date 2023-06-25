@@ -15,5 +15,5 @@
 (function () {
     'use strict';
     // create button for user to click
-    let clipAllBtn = createClipAllBtn();
+    addEventListener("DOMContentLoaded", createClipAllBtn);
 })();
