@@ -95,7 +95,7 @@ function waitForElm(selector) {
  * create button on the page with styles
  */
 const createClipAllBtn = async function () {
-    await waitForElm("#content > section > div > section > section > section > div > div.CouponsCatalogue-bottomContent.flex.items-start > div.CouponsCatalogue-coupons.flex-1.flex.flex-col.overflow-hidden");
+    await waitForElm("#content > section > div > section > section > section > div > div.ResponsiveFilters > div > div.flex.flex-row.justify-between.w-full > div.mr-16.flex.w-full > div");
     let btnContainer = await waitForElm("#content > section > div > section > section > div");
     let clipAllBtn = GM_addElement(btnContainer, 'button', {
         id : "clipAllBtn",
