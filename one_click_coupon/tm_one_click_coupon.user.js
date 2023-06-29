@@ -8,6 +8,7 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=kroger.com
 // @grant        GM_notification
 // @grant        GM_addElement
+// @grant        GM_registerMenuCommand
 // @require      https://github.com/jamesknowsbest/tm_scripts/raw/main/one_click_coupon/functions.js
 // ==/UserScript==
 

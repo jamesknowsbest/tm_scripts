@@ -14,17 +14,30 @@ const findAllCoupons = async function () {
     // scroll to bottom of the page to load all coupons
     let root = document.getElementById("root");
     let scrollHeight = root.scrollHeight;
-    window.scrollTo(0, root.scrollHeight);
+    // window.scrollTo(0, root.scrollHeight);
+    window.scrollTo({
+        top: root.scrollHeight,
+        left: 0,
+        behavior: "smooth",
+    });
     root = document.getElementById("root");
-    await delay(3000);
+    await delay(2000);
     while (scrollHeight != root.scrollHeight) {
-        window.scrollTo(scrollHeight, root.scrollHeight);
+        window.scrollTo({
+            top: root.scrollHeight,
+            left: 0,
+            behavior: "smooth",
+        });
         root = document.getElementById("root");
         scrollHeight = root.scrollHeight;
         await delay(3000);
     }
     // go back to the top when done
-    window.scrollTo(0, 0);
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+    });
     // query for all coupons on the page
     let coupons = document.querySelectorAll("#content > section > div > section.relative.pt-48 > section > section > div > div.CouponsCatalogue-bottomContent.flex.items-start > div.CouponsCatalogue-coupons.flex-1.flex.flex-col.overflow-hidden > div > div > div > ul > li > div > div > div > div > div.CouponCard-ButtonSection > button:nth-child(2)");
     // return all coupon buttons as an array of button elements
@@ -45,7 +58,9 @@ const userIsLoggedIn = function () {
  * @returns true if no exception thrown while clicking, false otherwise
  */
 const clipAllCoupons = async function () {
-    //check if user is logged in first and if not return false and display prompt
+    // This didn't seem to work, not sure exactly why but I don't think its needed
+    // the page will prompt the user on its own to sign in.
+    // check if user is logged in first and if not return false and display prompt
     // if (!userIsLoggedIn) {
     //     console.log("user is not logged in");
     //     GM_notification({
@@ -58,20 +73,18 @@ const clipAllCoupons = async function () {
     // }
     let coupons = await findAllCoupons();
     coupons = Array.prototype.slice.call(coupons);
-    console.log("coupons", coupons);
-    let totalNumOfCoupons = coupons.length;
-    let clipAllBtnInnerTxt = document.getElementById("clipAllBtnInnerTxt");
+    // console.log("coupons", coupons);
+    // let totalNumOfCoupons = coupons.length;
+    // let clipAllBtnInnerTxt = document.getElementById("clipAllBtnInnerTxt");
     try {
-        clipAllBtnInnerTxt.innerText = `clipping... 0% clipped`;
+        // clipAllBtnInnerTxt.innerText = `clipping... 0% clipped`;
         for (const coupon of coupons) {
             // for every 5th coupon wait 5 seconds to help avoid throttles
-            if (coupons.indexOf(coupon) % 5 === 0) {
-                await delay(3000);
-                clipAllBtnInnerTxt.innerText = `clipping... ${parseInt((coupons.indexOf(coupon)/totalNumOfCoupons)*100)}% clipped`;
-            }
+            await delay(500);
+            // clipAllBtnInnerTxt.innerText = `clipping... ${parseInt((coupons.indexOf(coupon)/totalNumOfCoupons)*100)}% clipped`;
             coupon.click();
         }
-        clipAllBtnInnerTxt.innerText = `Finished clipping!`;
+        // clipAllBtnInnerTxt.innerText = `Finished clipping!`;
     } catch (error) {
         console.error(error);
         return false;
@@ -107,14 +120,9 @@ function waitForElm(selector) {
  * create button on the page with styles
  */
 const createClipAllBtn = async function () {
-    await delay(3000);
-    let btnContainer = await waitForElm("#content > section > div > section.relative.pt-48 > section > div");
-    let clipAllBtn = GM_addElement(btnContainer, 'button', {
-        id : "clipAllBtn",
-        innerText : "Clip all coupons displayed",
-        class : "kds-Tabs-tab interactive kind-dominant variant-fill palette-accent"
-    });
-    clipAllBtn.addEventListener('click', clipAllCoupons, false);
-    clipAllBtn.innerHTML = "<span id=\"clipAllBtnInnerTxt\" class=\"kds-Text--l tab-text\">Clip All Coupons</span>";
-    return clipAllBtn;
+    const clip_all_btn_command_id = GM_registerMenuCommand("Clip All Coupons", function(event) {
+        // create button for user to click
+        clipAllCoupons();
+    }, "a");
+    return clip_all_btn_command_id;
 };
